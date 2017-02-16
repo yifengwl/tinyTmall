@@ -1,6 +1,7 @@
 package com.wanglu.tmall.controller;
 
 import com.wanglu.tmall.model.Category;
+import com.wanglu.tmall.model.Product;
 import com.wanglu.tmall.service.CategoryService;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,7 @@ public class AppController {
     @RequestMapping(value = {"forehome"}, method = RequestMethod.GET)
     public String listEmployees(ModelMap model) {
 
-        Category c = service.findById(60);
+        List<Product> c = service.findByCategoryID(60);
         List<Category> categorys = service.findAllCategory();
         model.addAttribute("cs", categorys);
         return "home";
