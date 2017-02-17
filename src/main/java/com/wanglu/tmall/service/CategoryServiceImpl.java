@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service("categoryService")
@@ -28,24 +30,27 @@ public class CategoryServiceImpl implements CategoryService {
 
         for (Category c : l) {
             Hibernate.initialize(c.getProducts());
-            for(Product p:c.getProducts()){
+            for (Product p : c.getProducts()) {
                 Hibernate.initialize(p.getProductImages());
             }
 
-//            List<ArrayList<Product>> productsByRow = new ArrayList<ArrayList<Product>>();
-//            List<Product> products = pdao.findByCategoryId(c.getId());
-//
-//            int index = 0;
-//            for (int i = 0; i < products.size(); ) {
-//                ArrayList<Product> tmp = new ArrayList<Product>();
-//                for (int j = 0; j < 5 && i < products.size(); j++) {
-//                    tmp.add(products.get(i++));
-//                }
-//                productsByRow.add(tmp);
-//
-//            }
-//            c.setProductsByRow(productsByRow);
-//            c.setProducts(products);
+            //divided  5 product per list
+            Iterator<Product> it = c.getProducts().iterator();
+            ArrayList<Product> productsKeeper = new ArrayList<Product>();
+            List<ArrayList<Product>> lap = new ArrayList<ArrayList<Product>>();
+            int index = 1;
+            while (it.hasNext()) {
+                if (index % 5 != 0) {
+                    productsKeeper.add(it.next());
+                }else{
+                    lap.add(productsKeeper);
+                    productsKeeper = new ArrayList<Product>();
+                    productsKeeper.add(it.next());
+                }
+            }
+            lap.add(productsKeeper);
+            c.setProductsByRow(lap);
+
         }
         return l;
     }
