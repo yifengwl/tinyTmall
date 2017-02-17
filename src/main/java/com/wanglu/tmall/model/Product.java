@@ -2,6 +2,7 @@ package com.wanglu.tmall.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Set;
 
 /**
  * Created by wanglu on 17/2/16.
@@ -23,10 +24,16 @@ public class Product {
     private float promotePrice;
     @Column
     private int stock;
-    @Column
-    private int cid;
+
     @Column
     private Date createDate;
+
+    @ManyToOne
+    @JoinColumn(name="cid")
+    private Category category;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "product",targetEntity = ProductImage.class,orphanRemoval = true)//用户作为一方使用OneToMany注解
+    private Set<ProductImage> productImages;
 
     public int getId() {
         return id;
@@ -76,19 +83,27 @@ public class Product {
         this.stock = stock;
     }
 
-    public int getCid() {
-        return cid;
-    }
-
-    public void setCid(int cid) {
-        this.cid = cid;
-    }
-
     public Date getCreateDate() {
         return createDate;
     }
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Set<ProductImage> getProductImages() {
+        return productImages;
+    }
+
+    public void setProductImages(Set<ProductImage> productImages) {
+        this.productImages = productImages;
     }
 }

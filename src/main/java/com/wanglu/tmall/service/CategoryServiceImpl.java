@@ -1,14 +1,13 @@
 package com.wanglu.tmall.service;
 
 import com.wanglu.tmall.dao.CategoryDao;
-import com.wanglu.tmall.dao.ProductDao;
 import com.wanglu.tmall.model.Category;
 import com.wanglu.tmall.model.Product;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service("categoryService")
@@ -17,35 +16,36 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Resource(name = "categoryDao")
     private CategoryDao dao;
-    @Resource(name = "productDao")
-    private ProductDao pdao;
+
 
     public Category findById(int id) {
         return dao.findById(id);
     }
 
-    public List<Product> findByCategoryID(int id) {
-        return pdao.findByCategoryId(id);
-    }
 
     public List<Category> findAllCategory() {
         List<Category> l = dao.findAllCategorys();
 
         for (Category c : l) {
-            List<ArrayList<Product>> productsByRow = new ArrayList<ArrayList<Product>>();
-            List<Product> products = pdao.findByCategoryId(c.getId());
-
-            int index = 0;
-            for (int i = 0; i < products.size(); ) {
-                ArrayList<Product> tmp = new ArrayList<Product>();
-                for (int j = 0; j < 5 && i < products.size(); j++) {
-                    tmp.add(products.get(i++));
-                }
-                productsByRow.add(tmp);
-
+            Hibernate.initialize(c.getProducts());
+            for(Product p:c.getProducts()){
+                Hibernate.initialize(p.getProductImages());
             }
-            c.setProductsByRow(productsByRow);
-            c.setProducts(products);
+
+//            List<ArrayList<Product>> productsByRow = new ArrayList<ArrayList<Product>>();
+//            List<Product> products = pdao.findByCategoryId(c.getId());
+//
+//            int index = 0;
+//            for (int i = 0; i < products.size(); ) {
+//                ArrayList<Product> tmp = new ArrayList<Product>();
+//                for (int j = 0; j < 5 && i < products.size(); j++) {
+//                    tmp.add(products.get(i++));
+//                }
+//                productsByRow.add(tmp);
+//
+//            }
+//            c.setProductsByRow(productsByRow);
+//            c.setProducts(products);
         }
         return l;
     }

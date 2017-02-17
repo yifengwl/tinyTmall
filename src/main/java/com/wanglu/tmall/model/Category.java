@@ -3,6 +3,7 @@ package com.wanglu.tmall.model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by wanglu on 17/2/16.
@@ -16,8 +17,8 @@ public class Category {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Transient
-    private List<Product> products;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "category",targetEntity = Product.class,orphanRemoval = true)//用户作为一方使用OneToMany注解
+    private Set<Product> products;
 
     @Transient
     private List<ArrayList<Product>> productsByRow ;
@@ -39,11 +40,11 @@ public class Category {
         this.name = name;
     }
 
-    public List<Product> getProducts() {
+    public Set<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(Set<Product> products) {
         this.products = products;
     }
 
