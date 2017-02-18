@@ -33,7 +33,7 @@ public class Product {
     private Category category;
 
     @Transient
-    private String firstProductImage;
+    private ProductImage firstProductImage;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "product",targetEntity = ProductImage.class,orphanRemoval = true)//用户作为一方使用OneToMany注解
     private Set<ProductImage> productImages;
@@ -110,11 +110,11 @@ public class Product {
         this.productImages = productImages;
     }
 
-    public String getFirstProductImage() {
+    public ProductImage getFirstProductImage() {
         return firstProductImage;
     }
 
-    public void setFirstProductImage(String firstProductImage) {
+    public void setFirstProductImage(ProductImage firstProductImage) {
         this.firstProductImage = firstProductImage;
     }
 }

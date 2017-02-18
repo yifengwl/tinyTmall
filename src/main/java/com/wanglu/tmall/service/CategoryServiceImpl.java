@@ -3,6 +3,7 @@ package com.wanglu.tmall.service;
 import com.wanglu.tmall.dao.CategoryDao;
 import com.wanglu.tmall.model.Category;
 import com.wanglu.tmall.model.Product;
+import com.wanglu.tmall.model.ProductImage;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +33,15 @@ public class CategoryServiceImpl implements CategoryService {
             Hibernate.initialize(c.getProducts());
             for (Product p : c.getProducts()) {
                 Hibernate.initialize(p.getProductImages());
+                Iterator<ProductImage> imageIterator = p.getProductImages().iterator();
+                while(imageIterator.hasNext()){
+                    ProductImage pi = imageIterator.next();
+                    if(pi.getType().equals("type_single")){
+                        p.setFirstProductImage(pi);
+                        break;
+                    }
+                }
+
             }
 
             //divided  5 product per list
@@ -52,6 +62,7 @@ public class CategoryServiceImpl implements CategoryService {
             c.setProductsByRow(lap);
 
         }
+
         return l;
     }
 
