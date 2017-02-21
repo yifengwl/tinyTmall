@@ -2,6 +2,7 @@ package com.wanglu.tmall.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -34,6 +35,18 @@ public class Product {
 
     @Transient
     private ProductImage firstProductImage;
+
+    @Transient
+    private List<ProductImage> productSingleImages;
+
+    @Transient
+    private List<ProductImage> productDetailImages;
+
+    @Transient
+    private int saleCount = 999;
+
+    @Transient
+    private int reviewCount = 999;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "product",targetEntity = ProductImage.class,orphanRemoval = true)//用户作为一方使用OneToMany注解
     private Set<ProductImage> productImages;
@@ -116,5 +129,37 @@ public class Product {
 
     public void setFirstProductImage(ProductImage firstProductImage) {
         this.firstProductImage = firstProductImage;
+    }
+
+    public List<ProductImage> getProductSingleImages() {
+        return productSingleImages;
+    }
+
+    public void setProductSingleImages(List<ProductImage> productSingleImages) {
+        this.productSingleImages = productSingleImages;
+    }
+
+    public int getSaleCount() {
+        return saleCount;
+    }
+
+    public void setSaleCount(int saleCount) {
+        this.saleCount = saleCount;
+    }
+
+    public int getReviewCount() {
+        return reviewCount;
+    }
+
+    public void setReviewCount(int reviewCount) {
+        this.reviewCount = reviewCount;
+    }
+
+    public List<ProductImage> getProductDetailImages() {
+        return productDetailImages;
+    }
+
+    public void setProductDetailImages(List<ProductImage> productDetailImages) {
+        this.productDetailImages = productDetailImages;
     }
 }
