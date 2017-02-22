@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by wanglu on 17/2/17.
  */
 @Entity
-@Table(name ="productimage")
+@Table(name = "productimage")
 public class ProductImage {
     @Id
     private int id;
@@ -17,27 +17,27 @@ public class ProductImage {
     private String type;
 
 
-        public int getId() {
-            return id;
-        }
+    public int getId() {
+        return id;
+    }
 
-        public void setId(int id) {
-            this.id = id;
-        }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-        public Product getProduct() {
-            return product;
-        }
+    public Product getProduct() {
+        return product;
+    }
 
-        public void setProduct(Product product) {
-            this.product = product;
-        }
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
-        public String getType() {
-            return type;
-        }
+    public String getType() {
+        return type;
+    }
 
-        public void setType(String type) {
-            this.type = type;
-        }
+    public void setType(String type) {
+        this.type = type;
+    }
 }

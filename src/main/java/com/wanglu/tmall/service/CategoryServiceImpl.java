@@ -20,9 +20,26 @@ public class CategoryServiceImpl implements CategoryService {
     @Resource(name = "categoryDao")
     private CategoryDao dao;
 
+    private void initCategory(Category c){
+        Hibernate.initialize(c.getProducts());
+        for (Product p : c.getProducts()) {
+            Hibernate.initialize(p.getProductImages());
+            Iterator<ProductImage> imageIterator = p.getProductImages().iterator();
+            while(imageIterator.hasNext()){
+                ProductImage pi = imageIterator.next();
+                if(pi.getType().equals("type_single")){
+                    p.setFirstProductImage(pi);
+                    break;
+                }
+            }
+
+        }
+    }
 
     public Category findById(int id) {
-        return dao.findById(id);
+        Category c = dao.findById(id);
+        initCategory(c);
+        return c;
     }
 
 
@@ -30,19 +47,7 @@ public class CategoryServiceImpl implements CategoryService {
         List<Category> l = dao.findAllCategorys();
 
         for (Category c : l) {
-            Hibernate.initialize(c.getProducts());
-            for (Product p : c.getProducts()) {
-                Hibernate.initialize(p.getProductImages());
-                Iterator<ProductImage> imageIterator = p.getProductImages().iterator();
-                while(imageIterator.hasNext()){
-                    ProductImage pi = imageIterator.next();
-                    if(pi.getType().equals("type_single")){
-                        p.setFirstProductImage(pi);
-                        break;
-                    }
-                }
-
-            }
+            initCategory(c);
 
             //divided  5 product per list
             Iterator<Product> it = c.getProducts().iterator();
