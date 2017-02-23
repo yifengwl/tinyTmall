@@ -42,4 +42,5 @@ public class AppController {
         map.addAttribute("c",c);
         return "category";
     }
+
 }

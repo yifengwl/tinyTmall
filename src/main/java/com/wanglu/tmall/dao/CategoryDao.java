@@ -10,4 +10,5 @@ public interface CategoryDao {
     void saveCategory(Category employee);
     List<Category> findAllCategorys();
     void deleteCategoryByID(int id);
+
 }

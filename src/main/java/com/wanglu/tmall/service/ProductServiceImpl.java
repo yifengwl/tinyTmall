@@ -16,32 +16,44 @@ import java.util.List;
  */
 @Service("productService")
 @Transactional
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
     @Resource(name = "productDao")
     private ProductDao dao;
 
-    public Product getProductById(int id) {
-        Product p = dao.findById(id);
+    private void initProduct(Product p) {
         Hibernate.initialize(p.getCategory());
         Hibernate.initialize(p.getProductImages());
         List<ProductImage> listProductSingleImage = new ArrayList<ProductImage>();
         List<ProductImage> listProductDetailImage = new ArrayList<ProductImage>();
         boolean first = true;
-        for (ProductImage pi:p.getProductImages()){
-            if(pi.getType().equals("type_single")){
-                if(first){
+        for (ProductImage pi : p.getProductImages()) {
+            if (pi.getType().equals("type_single")) {
+                if (first) {
                     p.setFirstProductImage(pi);
-                    first=false;
+                    first = false;
                 }
                 listProductSingleImage.add(pi);
-            }else{
+            } else {
                 listProductDetailImage.add(pi);
             }
         }
         p.setProductSingleImages(listProductSingleImage);
         p.setProductDetailImages(listProductDetailImage);
+    }
 
+    public Product getProductById(int id) {
+        Product p = dao.findById(id);
+        initProduct(p);
         return p;
+    }
+
+    public List<Product> getProductsByKeyword(String keyword) {
+        List<Product> lp = dao.findByKeyword(keyword);
+        for (Product p : lp) {
+            initProduct(p);
+        }
+
+        return lp;
     }
 }

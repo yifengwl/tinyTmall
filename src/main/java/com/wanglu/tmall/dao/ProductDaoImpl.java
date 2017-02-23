@@ -25,6 +25,12 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
         return (List<Product>) criteria.list();
     }
 
+    public List<Product> findByKeyword(String keyword) {
+        Criteria criteria = createEntityCriteria();
+        criteria.add(Restrictions.like("name", "%"+keyword+"%"));
+        return (List<Product>) criteria.list();
+    }
+
     public void deleteProductByID(int id) {
 
     }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by wanglu on 17/2/20.
@@ -24,5 +25,12 @@ public class ProductController {
         map.addAttribute("p",p);
         System.out.println(productid);
         return "product";
+    }
+
+    @RequestMapping(value="foresearch",method = RequestMethod.POST)
+    public String search(@RequestParam("keyword") String keyword,ModelMap map){
+        List<Product> lp = service.getProductsByKeyword(keyword);
+        map.addAttribute("ps",lp);
+        return "searchResult";
     }
 }

@@ -39,20 +39,16 @@ $(function(){
 })
 </script>
 
+<form:form method="POST" modelAttribute="user" class="registerForm">
 
-
-<form method="post" action="foreregister" class="registerForm">
-
-
-<div class="registerDiv">
+	<div class="registerDiv">
 	<div class="registerErrorMessageDiv">
-		<div class="alert alert-danger" role="alert">
-		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
-		  	<span class="errorMessage"></span>
-		</div>		
+	<div class="alert alert-danger" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+	<span class="errorMessage"></span>
+	</div>
 	</div>
 
-	
 	<table class="registerTable" align="center">
 		<tr>
 			<td  class="registerTip registerTableLeftTD">设置会员名</td>
@@ -60,26 +56,89 @@ $(function(){
 		</tr>
 		<tr>
 			<td class="registerTableLeftTD">登陆名</td>
-			<td  class="registerTableRightTD"><input id="name" name="name" placeholder="会员名一旦设置成功，无法修改" > </td>
+			<td  class="registerTableRightTD">
+			<form:input path="name" id="name"/></td>
 		</tr>
-		<tr>
-			<td  class="registerTip registerTableLeftTD">设置登陆密码</td>
-			<td  class="registerTableRightTD">登陆时验证，保护账号信息</td>
-		</tr>		
-		<tr>
-			<td class="registerTableLeftTD">登陆密码</td>
-			<td class="registerTableRightTD"><input id="password" name="password" type="password"  placeholder="设置你的登陆密码" > </td>
-		</tr>
-		<tr>
-			<td class="registerTableLeftTD">密码确认</td>
-			<td class="registerTableRightTD"><input id="repeatpassword" type="password"   placeholder="请再次输入你的密码" > </td>
-		</tr>
-				
-		<tr>
-			<td colspan="2" class="registerButtonTD">
-				<a href="registerSuccess.jsp"><button>提   交</button></a>
-			</td>
-		</tr>				
+		<%--<tr>--%>
+			<%--<td><label for="name">Name: </label> </td>--%>
+			<%--<td><form:input path="name" id="name"/></td>--%>
+			<%--<td><form:errors path="name" cssClass="error"/></td>--%>
+		<%--</tr>--%>
+
+		<%--<tr>--%>
+			<%--<td><label for="joiningDate">Joining Date: </label> </td>--%>
+			<%--<td><form:input path="joiningDate" id="joiningDate"/></td>--%>
+			<%--<td><form:errors path="joiningDate" cssClass="error"/></td>--%>
+		<%--</tr>--%>
+
+		<%--<tr>--%>
+			<%--<td><label for="salary">Salary: </label> </td>--%>
+			<%--<td><form:input path="salary" id="salary"/></td>--%>
+			<%--<td><form:errors path="salary" cssClass="error"/></td>--%>
+		<%--</tr>--%>
+
+		<%--<tr>--%>
+			<%--<td><label for="ssn">SSN: </label> </td>--%>
+			<%--<td><form:input path="ssn" id="ssn"/></td>--%>
+			<%--<td><form:errors path="ssn" cssClass="error"/></td>--%>
+		<%--</tr>--%>
+
+		<%--<tr>--%>
+			<%--<td colspan="3">--%>
+				<%--<c:choose>--%>
+					<%--<c:when test="${edit}">--%>
+						<%--<input type="submit" value="Update"/>--%>
+					<%--</c:when>--%>
+					<%--<c:otherwise>--%>
+						<%--<input type="submit" value="Register"/>--%>
+					<%--</c:otherwise>--%>
+				<%--</c:choose>--%>
+			<%--</td>--%>
+		<%--</tr>--%>
 	</table>
-</div>
-</form>
+</form:form>
+
+
+
+<%--<form method="post" action="foreregister" class="registerForm">--%>
+
+
+<%--<div class="registerDiv">--%>
+	<%--<div class="registerErrorMessageDiv">--%>
+		<%--<div class="alert alert-danger" role="alert">--%>
+		  <%--<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>--%>
+		  	<%--<span class="errorMessage"></span>--%>
+		<%--</div>		--%>
+	<%--</div>--%>
+
+	<%----%>
+	<%--<table class="registerTable" align="center">--%>
+		<%--<tr>--%>
+			<%--<td  class="registerTip registerTableLeftTD">设置会员名</td>--%>
+			<%--<td></td>--%>
+		<%--</tr>--%>
+		<%--<tr>--%>
+			<%--<td class="registerTableLeftTD">登陆名</td>--%>
+			<%--<td  class="registerTableRightTD"><input id="name" name="name" placeholder="会员名一旦设置成功，无法修改" > </td>--%>
+		<%--</tr>--%>
+		<%--<tr>--%>
+			<%--<td  class="registerTip registerTableLeftTD">设置登陆密码</td>--%>
+			<%--<td  class="registerTableRightTD">登陆时验证，保护账号信息</td>--%>
+		<%--</tr>		--%>
+		<%--<tr>--%>
+			<%--<td class="registerTableLeftTD">登陆密码</td>--%>
+			<%--<td class="registerTableRightTD"><input id="password" name="password" type="password"  placeholder="设置你的登陆密码" > </td>--%>
+		<%--</tr>--%>
+		<%--<tr>--%>
+			<%--<td class="registerTableLeftTD">密码确认</td>--%>
+			<%--<td class="registerTableRightTD"><input id="repeatpassword" type="password"   placeholder="请再次输入你的密码" > </td>--%>
+		<%--</tr>--%>
+				<%----%>
+		<%--<tr>--%>
+			<%--<td colspan="2" class="registerButtonTD">--%>
+				<%--<a href="registerSuccess.jsp"><button>提   交</button></a>--%>
+			<%--</td>--%>
+		<%--</tr>				--%>
+	<%--</table>--%>
+<%--</div>--%>
+<%--</form>--%>

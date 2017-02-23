@@ -13,6 +13,7 @@ public interface ProductDao {
     Product findById(int id);
     void saveProduct(Product product);
     List<Product> findAllProducts();
+    List<Product> findByKeyword(String keyword);
     List<Product> findByCategoryId(int id);
     void deleteProductByID(int id);
 
