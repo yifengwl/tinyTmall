@@ -4,7 +4,7 @@
 	pageEncoding="UTF-8" isELIgnored="false"%>
 
 
-<%@include file="modal.jsp" %>
+<%--<%@include file="modal.jsp" %>--%>
 
 <div id="footer"  class="footer" style="display: block;">
 	

@@ -8,8 +8,6 @@
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <mvc:annotation-driven></mvc:annotation-driven>
     <context:component-scan base-package="com.wanglu.tmall">
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
     </context:component-scan>
 
     <!-- 配置视图解析器 如何把handler 方法返回值解析为实际的物理视图 -->
@@ -17,7 +15,13 @@
         <property name="prefix" value="/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
-
+    <mvc:interceptors>
+        <!-- 多个拦截器，顺序执行 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/buy"/>
+            <bean class="com.wanglu.tmall.interceptor.AuthInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <!--<mvc:interceptors>-->
         <!--&lt;!&ndash; 多个拦截器，顺序执行 &ndash;&gt;-->

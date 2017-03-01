@@ -2,12 +2,16 @@ package com.wanglu.tmall.service;
 
 import com.wanglu.tmall.dao.UserDao;
 import com.wanglu.tmall.model.User;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
 /**
  * Created by wanglu on 17/2/23.
  */
+@Service("userService")
+@Transactional
 public class UserServiceImpl implements UserService {
     @Resource(name = "userDao")
     private UserDao userDao;

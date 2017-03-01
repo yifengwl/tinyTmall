@@ -39,6 +39,7 @@ $(function(){
 })
 </script>
 
+
 <form:form method="POST" modelAttribute="user" class="registerForm">
 
 	<div class="registerDiv">
@@ -57,46 +58,35 @@ $(function(){
 		<tr>
 			<td class="registerTableLeftTD">登陆名</td>
 			<td  class="registerTableRightTD">
-			<form:input path="name" id="name"/></td>
+			<form:input path="name" id="name" placeholder="设置你的登录名"/></td>
+		</tr>
+		<tr>
+			<td  class="registerTip registerTableLeftTD">设置登陆密码</td>
+			<td  class="registerTableRightTD">登陆时验证，保护账号信息</td>
+		</tr>
+
+		<tr>
+			<td class="registerTableLeftTD">登陆密码</td>
+			<td class="registerTableRightTD">
+				<form:password path="password" id="password" placeholder="设置你的登录密码"/>
+				<%--<input id="password" name="password" type="password"  placeholder="设置你的登陆密码" > --%>
+			</td>
 		</tr>
 		<%--<tr>--%>
-			<%--<td><label for="name">Name: </label> </td>--%>
-			<%--<td><form:input path="name" id="name"/></td>--%>
-			<%--<td><form:errors path="name" cssClass="error"/></td>--%>
-		<%--</tr>--%>
-
-		<%--<tr>--%>
-			<%--<td><label for="joiningDate">Joining Date: </label> </td>--%>
-			<%--<td><form:input path="joiningDate" id="joiningDate"/></td>--%>
-			<%--<td><form:errors path="joiningDate" cssClass="error"/></td>--%>
-		<%--</tr>--%>
-
-		<%--<tr>--%>
-			<%--<td><label for="salary">Salary: </label> </td>--%>
-			<%--<td><form:input path="salary" id="salary"/></td>--%>
-			<%--<td><form:errors path="salary" cssClass="error"/></td>--%>
-		<%--</tr>--%>
-
-		<%--<tr>--%>
-			<%--<td><label for="ssn">SSN: </label> </td>--%>
-			<%--<td><form:input path="ssn" id="ssn"/></td>--%>
-			<%--<td><form:errors path="ssn" cssClass="error"/></td>--%>
-		<%--</tr>--%>
-
-		<%--<tr>--%>
-			<%--<td colspan="3">--%>
-				<%--<c:choose>--%>
-					<%--<c:when test="${edit}">--%>
-						<%--<input type="submit" value="Update"/>--%>
-					<%--</c:when>--%>
-					<%--<c:otherwise>--%>
-						<%--<input type="submit" value="Register"/>--%>
-					<%--</c:otherwise>--%>
-				<%--</c:choose>--%>
+			<%--<td class="registerTableLeftTD">密码确认</td>--%>
+			<%--<td class="registerTableRightTD">--%>
+				<%--<input id="repeatpassword" type="password"   placeholder="请再次输入你的密码" >--%>
 			<%--</td>--%>
 		<%--</tr>--%>
+		<tr>
+			<td colspan="2" class="registerButtonTD">
+				<input type="submit" value="提交"/>
+			</td>
+		</tr>
 	</table>
 </form:form>
+
+
 
 
 

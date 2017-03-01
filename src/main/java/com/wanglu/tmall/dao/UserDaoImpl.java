@@ -21,14 +21,14 @@ public class UserDaoImpl extends AbstractDao<Integer,User> implements UserDao{
 
     public boolean isExist(String username) {
         Criteria criteria = createEntityCriteria();
-        criteria.add(Restrictions.eq("username", username));
+        criteria.add(Restrictions.eq("name", username));
         Object o = criteria.uniqueResult();
         return o!=null;
     }
 
     public User getByUsername(String username) {
         Criteria criteria = createEntityCriteria();
-        criteria.add(Restrictions.eq("username", username));
+        criteria.add(Restrictions.eq("name", username));
         return (User)criteria.uniqueResult();
     }
 }

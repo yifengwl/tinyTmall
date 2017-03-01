@@ -79,7 +79,16 @@ $(function(){
 
 });
 
-</script>	
+</script>
+
+	<script type="text/javascript">
+		function test(){
+			var user = document.getElementById("name");
+			alert(user.value);
+			return false;
+		}
+	</script>
+
 </head>
 
 <body>

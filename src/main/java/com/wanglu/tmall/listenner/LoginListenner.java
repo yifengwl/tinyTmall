@@ -1,5 +1,7 @@
 package com.wanglu.tmall.listenner;
 
+import com.wanglu.tmall.model.User;
+
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
@@ -22,8 +24,8 @@ public class LoginListenner implements HttpSessionAttributeListener {
 
         String name = event.getName();
 
-        if (name.equals("username")) {
-            String user = (String) event.getValue();
+        if (name.equals("user")) {
+            String user = ((User) event.getValue()).getName();
             if (map.get(user) != null) {
                 HttpSession session = map.get(user);
                 session.removeAttribute(user);
