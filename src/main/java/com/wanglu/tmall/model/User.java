@@ -1,5 +1,6 @@
 package com.wanglu.tmall.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -12,7 +13,10 @@ import javax.persistence.Table;
 public class User {
     @Id
     private int id;
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "password")
     private String password;
 
     public int getId() {

@@ -7,6 +7,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -42,7 +44,7 @@ public class UserController {
         } else {
             userService.saveUser(user);
             map.addAttribute("msg", "user registe success");
-            session.setAttribute("user",user);
+            session.setAttribute("user", user);
             return "registerSuccess";
         }
 
@@ -72,9 +74,36 @@ public class UserController {
         }
 
     }
-    @RequestMapping(value = "forelogout",method = RequestMethod.GET)
-    public String logout(HttpSession session){
+
+    @RequestMapping(value = "forelogout", method = RequestMethod.GET)
+    public String logout(HttpSession session) {
         session.removeAttribute("user");
         return "redirect:forehome";
     }
+
+    @RequestMapping(value = "forecheckLogin", method = RequestMethod.GET)
+    @ResponseBody
+    public String checkLogin(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user != null && user.getName() != null)
+            return "success";
+        else
+            return "false";
+    }
+    @RequestMapping(value = "foreloginAjax", method = RequestMethod.GET)
+    @ResponseBody
+    public String checkLoginAjax(@RequestParam("name")String name,@RequestParam("password")String password,HttpSession session) {
+        User user = new User();
+        user.setName(name);
+        user.setPassword(password);
+
+        if (userService.checkUser(user)) {
+            session.setAttribute("user", user);
+            return "success";
+        } else {
+            return "false";
+        }
+
+    }
+
 }

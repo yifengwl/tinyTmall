@@ -13,4 +13,5 @@ public interface UserService {
     boolean checkUser(User user);
 
     boolean isUserExist(User user);
+
 }
