@@ -13,7 +13,6 @@ import java.util.Set;
 public class Product {
     @Id
     private int id;
-
     @Column
     private String name;
 
